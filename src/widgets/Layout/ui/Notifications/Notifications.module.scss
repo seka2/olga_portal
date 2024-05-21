@@ -1,0 +1,55 @@
+.notifications {
+  position: relative;
+  z-index: 1;
+  color: #1d2b43;
+  cursor: pointer;
+}
+
+.list {
+  position: absolute;
+  top: 100%;
+  right: -29px;
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.item {
+  position: relative;
+  width: 347px;
+  padding: 17px 20px;
+  border-radius: 6px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+
+  @media screen and (max-width: 575px) {
+    width: 280px;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  width: 10px;
+  cursor: pointer;
+}
+
+.text {
+  margin-bottom: 5px;
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.link {
+  color: #fe2c89;
+  font-size: 13px;
+  line-height: 0.15;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

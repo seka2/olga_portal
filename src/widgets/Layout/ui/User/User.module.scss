@@ -1,0 +1,49 @@
+.user {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 166px;
+  margin-left: 3px;
+  padding: 34px 20px 15px;
+  border-radius: 30px;
+  box-shadow: 0px 3.36px 52.92px 0px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.actions {
+  position: absolute;
+  top: 18px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.avatar {
+  overflow: hidden;
+  width: 75px;
+  height: 75px;
+  margin-bottom: 7px;
+  border-radius: 50%;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.name {
+  margin-bottom: 2px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+}
+
+.email {
+  color: #a7a7a7;
+  font-size: 12px;
+  line-height: 1.2;
+}

@@ -1,0 +1,31 @@
+.header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+
+  @media screen and (max-width: 1336px) {
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+}
+
+.title {
+  margin-right: 40px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 17px;
+
+  @media screen and (max-width: 1336px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 21px;
+  }
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}

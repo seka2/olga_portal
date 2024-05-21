@@ -1,0 +1,31 @@
+.faq {
+  margin-bottom: 30px;
+}
+
+.title {
+  margin-bottom: 30px;
+
+  @media screen and (max-width: 992px) {
+    display: none;
+  }
+}
+
+.body {
+  padding: 26px 27px 25px 31px;
+  border-radius: 25px;
+  background-color: #fff;
+  box-shadow: 0px 7.56px 47.88px 0px rgba(0, 0, 0, 0.04);
+
+  @media screen and (max-width: 767px) {
+    padding: 20px;
+  }
+}
+
+.items {
+  display: grid;
+  gap: 4px;
+}
+
+.item {
+  transition: height 0.3s cubic-bezier(0, 0, 0, 1);
+}

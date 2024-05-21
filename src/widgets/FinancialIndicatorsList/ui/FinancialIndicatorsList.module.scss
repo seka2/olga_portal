@@ -1,0 +1,13 @@
+.indicators {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+
+  @media screen and (max-width: 1336px) {
+    gap: 22px;
+  }
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+}

@@ -1,0 +1,20 @@
+.upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  border-radius: 4px;
+  background-color: #1d2b43;
+  color: #f2f4f7;
+  font-size: 16px;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+.input {
+  display: none;
+}
+
+.text {
+  margin-left: 13px;
+}

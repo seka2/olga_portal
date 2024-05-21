@@ -1,0 +1,48 @@
+.settings {
+  margin-bottom: 40px;
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 30px;
+  }
+}
+
+.title {
+  margin-bottom: 27px;
+
+  @media screen and (max-width: 992px) {
+    display: none;
+  }
+}
+
+.list {
+  display: flex;
+  gap: 70px;
+  margin-bottom: 34px;
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 24px;
+  }
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.tab {
+  position: relative;
+  border-bottom: 3px solid transparent;
+  font-size: 20px;
+  cursor: pointer;
+
+  &[aria-selected="true"] {
+    border-color: #fe2c89;
+    color: #1d2b43;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.dropdown {
+  margin-bottom: 10px;
+}

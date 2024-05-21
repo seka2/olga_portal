@@ -1,0 +1,253 @@
+.deposit {
+  padding: 60px 47px 59px 45px;
+  border-radius: 25px;
+  background-color: #fff;
+  box-shadow: 0px 7.56px 47.88px 0px rgba(0, 0, 0, 0.04);
+
+  @media screen and (max-width: 1336px) {
+    padding: 40px 27px;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 18px 10px 30px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.items {
+  display: grid;
+  gap: 49px;
+  margin-bottom: 40px;
+
+  @media screen and (max-width: 992px) {
+    gap: 45px;
+    margin-bottom: 28px;
+  }
+  @media screen and (max-width: 767px) {
+    gap: 27px;
+    margin-bottom: 18px;
+  }
+}
+
+.item {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 35px;
+
+  @media screen and (max-width: 992px) {
+    gap: 29px;
+  }
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 32px 1fr;
+    gap: 12px;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 30px;
+    bottom: -49px;
+    width: 2px;
+    background-color: #001534;
+
+    @media screen and (max-width: 767px) {
+      left: 16px;
+    }
+  }
+
+  &:last-child::before {
+    display: none;
+  }
+}
+
+.content {
+  padding-top: 26px;
+
+  @media screen and (max-width: 992px) {
+    padding-top: 17px;
+  }
+  @media screen and (max-width: 767px) {
+    padding-top: 10px;
+  }
+}
+
+.label,
+.title {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: -0.8px;
+
+  @media screen and (max-width: 767px) {
+    font-size: 16px;
+  }
+}
+
+.title {
+  margin-bottom: 17px;
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 12px;
+  }
+}
+
+.number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background-color: #1d2b43;
+  color: #fff;
+  font-size: 24px;
+
+  @media screen and (max-width: 767px) {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding-right: 62px;
+
+  @media screen and (max-width: 1336px) {
+    padding-right: 0;
+  }
+  @media screen and (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: 29px;
+  }
+  @media screen and (max-width: 767px) {
+    gap: 18px;
+  }
+}
+
+.options {
+  display: grid;
+  gap: 11px;
+
+  @media screen and (max-width: 767px) {
+    gap: 10px;
+  }
+
+  li {
+    font-size: 16px;
+    line-height: 1.15;
+
+    @media screen and (max-width: 767px) {
+      font-size: 14px;
+    }
+
+    span {
+      color: #fe2c89;
+      font-weight: 700;
+    }
+  }
+}
+
+.note {
+  margin-bottom: 40px;
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 31px;
+  }
+  @media screen and (max-width: 767px) {
+    margin-bottom: 18px;
+  }
+}
+
+.button {
+  width: 213px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.size {
+  display: flex;
+  align-items: center;
+  gap: 65px;
+  padding-top: 11px;
+
+  @media screen and (max-width: 992px) {
+    align-items: flex-start;
+    gap: 52px;
+    padding-top: 18px;
+  }
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    gap: 11px;
+    padding-top: 3px;
+  }
+}
+
+.coefficient {
+  display: flex;
+  align-items: center;
+  gap: 52px;
+  padding-top: 6px;
+
+  @media screen and (max-width: 992px) {
+    padding-top: 0;
+  }
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 62px;
+  }
+}
+
+.field {
+  position: relative;
+}
+
+.slider {
+  width: 280px;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    padding-right: 9px;
+    padding-left: 7px;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+}
+
+.input {
+  width: 260px;
+  height: 48px;
+  padding-left: 40px;
+  padding-right: 12px;
+  border: 1px solid #fe2c89;
+  border-radius: 6px;
+
+  @media screen and (max-width: 992px) {
+    width: 294px;
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

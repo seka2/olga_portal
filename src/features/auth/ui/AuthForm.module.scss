@@ -1,0 +1,81 @@
+.items {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.title {
+  margin-bottom: 14px;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.25;
+  letter-spacing: -1.3px;
+
+  @media screen and (max-width: 992px) {
+    font-size: 24px;
+  }
+}
+
+.subtitle {
+  margin-bottom: 15px;
+  font-size: 14px;
+  line-height: 1.42;
+  letter-spacing: 0.2px;
+}
+
+.fields {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.or {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #cdd5e9;
+  }
+
+  span {
+    padding: 0 16px;
+    background-color: #fff;
+    color: #d4d4d4;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+.forgot {
+  margin-bottom: 16px;
+  color: #fe2c89;
+  font-size: 12px;
+  line-height: 1.35;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+.checkbox {
+  margin-top: 16px;
+}
+
+.button {
+  letter-spacing: -0.9px;
+}
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

@@ -1,0 +1,52 @@
+.auth {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  background-color: #f5f7fc;
+
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form {
+  width: 35.8vw;
+  min-width: 340px;
+  max-width: 516px;
+  background-color: #fbfcfe;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 16px;
+  }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 24px;
+  padding: 4px;
+  background-color: #f5f7fc;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: background-color 300ms, color 300ms;
+
+  &[aria-selected="true"] {
+    background-color: #ec1076;
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

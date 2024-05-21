@@ -1,0 +1,106 @@
+@font-face {
+  font-family: 'Gill Sans';
+  src: url('./shared/assets/fonts/GillSansC-Bold.woff2') format('woff2'),
+      url('./shared/assets/fonts/GillSansC-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gill Sans';
+  src: url('./shared/assets/fonts/GillSansLightC.woff2') format('woff2'),
+      url('./shared/assets/fonts/GillSansLightC.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gill Sans';
+  src: url('./shared/assets/fonts/GillSans-Medium.woff2') format('woff2'),
+      url('./shared/assets/fonts/GillSans-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gill Sans';
+  src: url('./shared/assets/fonts/GillSansC.woff2') format('woff2'),
+      url('./shared/assets/fonts/GillSansC.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Gill Sans";
+  font-size: 18px;
+  font-weight: 400;
+  background-color: #f3f5fb;
+  color: #1d2b43;
+}
+
+a {
+  color: #1d2b43;
+  font: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
+}
+
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 26px;
+  }
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -1.2px;
+}
+
+@media screen and (max-width: 767px) {
+  h2 {
+    font-size: 18px;
+    letter-spacing: -0.8px;
+  }
+}
+
+.container {
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media screen and (max-width: 1336px) {
+  .container {
+    max-width: 100%;
+  }
+}

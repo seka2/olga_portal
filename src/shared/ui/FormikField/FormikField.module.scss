@@ -1,0 +1,73 @@
+.box {
+  position: relative;
+  z-index: 1;
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  color: #111112;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #999999;
+  }
+
+  .withPassword & {
+    padding-right: 50px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.label {
+  color: #111112;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.info {
+  color: #ec1076;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.passwordIcon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.textarea {
+  resize: none;
+  width: 100%;
+  height: 234px;
+  padding: 17px;
+  border: 1px solid #b2b2b2;
+  border-radius: 5px;
+  font-size: 16px;
+
+  @media screen and (max-width: 992px) {
+    height: 134px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

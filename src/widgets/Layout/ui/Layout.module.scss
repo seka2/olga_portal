@@ -1,0 +1,25 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 40px;
+
+  @media screen and (max-width: 767px) {
+    padding-bottom: 31px;
+  }
+
+  .secondary & {
+    background-image: url("../assets/secondary-bg.png");
+    background-repeat: no-repeat;
+    background-position: right -3px bottom 145px;
+
+    @media screen and (max-width: 992px) {
+      background: none;
+    }
+  }
+}

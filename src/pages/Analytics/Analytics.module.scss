@@ -1,0 +1,26 @@
+.title {
+  margin-bottom: 21px;
+
+  @media screen and (max-width: 992px) {
+    display: none;
+  }
+}
+
+.filter {
+  margin-bottom: 29px;
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 17px;
+  }
+  @media screen and (max-width: 767px) {
+    margin-bottom: 10px;
+  }
+}
+
+.reportBug {
+  margin-bottom: 60px;
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 30px;
+  }
+}

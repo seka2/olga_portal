@@ -1,0 +1,27 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 29px;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 16px;
+  border-bottom: 1px solid #cdd5e9;
+}
+
+.progress {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+}
+
+.footer {
+  margin-top: auto;
+  text-align: center;
+}

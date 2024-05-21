@@ -1,0 +1,14 @@
+.ReactModal__Overlay {
+  z-index: 99;
+}
+
+.ReactModal__Content {
+  inset: initial !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}

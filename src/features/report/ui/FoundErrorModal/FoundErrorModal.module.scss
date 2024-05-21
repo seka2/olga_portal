@@ -1,0 +1,53 @@
+.modal {
+  max-width: 676px;
+
+  @media screen and (max-width: 992px) {
+    min-width: 320px;
+    max-width: 320px;
+  }
+}
+
+.title {
+  margin-bottom: 11px;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
+
+  @media screen and (max-width: 992px) {
+    font-size: 24px;
+    letter-spacing: -1.1px;
+  }
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 1.15;
+  letter-spacing: -.1px;
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 18px;
+    font-size: 16px;
+  }
+}
+
+.textarea {
+  margin-bottom: 13px;
+}
+
+.upload {
+  margin-bottom: 22px;
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 11px;
+  }
+}
+
+.checkbox {
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 14px;
+  }
+}

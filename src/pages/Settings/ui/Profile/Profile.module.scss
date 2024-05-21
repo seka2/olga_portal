@@ -1,0 +1,64 @@
+.profile {
+  padding: 33px 30px 30px 27px;
+  border-radius: 25px;
+  background-color: #fff;
+  box-shadow: 0px 7.56px 47.88px 0px rgba(0, 0, 0, 0.04);
+  background-image: url("../../assets/profile-bg.png");
+  background-repeat: no-repeat;
+  background-position: right 12px top;
+
+  @media screen and (max-width: 992px) {
+    padding-top: 28px;
+    padding-left: 30px;
+    background-position: right top;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 20px;
+    background: #fff;
+  }
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 992px) {
+    gap: 22px;
+  }
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.input {
+  height: 50px;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.upload {
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.button {
+  max-width: 213px;
+
+  @media screen and (max-width: 767px) {
+    max-width: 100%;
+  }
+}

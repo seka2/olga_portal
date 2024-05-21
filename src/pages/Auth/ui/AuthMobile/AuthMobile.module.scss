@@ -1,0 +1,43 @@
+.mobile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 16px;
+  background-image: url("../../assets/auth-mobile-bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.skip {
+  position: absolute;
+  top: 24px;
+  right: 17px;
+  color: #fe2c89;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.6px;
+  cursor: pointer;
+}
+
+.img {
+  max-width: 319px;
+  height: auto;
+  margin: auto;
+}
+
+.title {
+  margin-bottom: 24px;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.35;
+  letter-spacing: -0.9px;
+  text-align: center;
+}
+
+.buttons {
+  display: grid;
+  gap: 16px;
+}
