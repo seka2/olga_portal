@@ -9,13 +9,14 @@ import filterIcon from "./assets/filter.svg";
 interface SelectFilterProps {
   options: Options;
   onChange: (value: Option) => void;
+  selectedIndex: number;
 }
 
 export const SelectFilter: React.FC<SelectFilterProps> = (props) => {
-  const { options, onChange } = props;
+  const { options, onChange, selectedIndex } = props;
 
   const [selectedOption, setSelectedOption] = useState<SingleValue<Option>>(
-    options[0]
+    options[selectedIndex]
   );
 
   const handleChange = (newValue: SingleValue<Option>) => {

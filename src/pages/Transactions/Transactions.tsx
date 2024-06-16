@@ -5,8 +5,9 @@ import { useMediaQuery } from "usehooks-ts";
 
 import classes from "./Transactions.module.scss";
 import { CurrentDeals } from "./ui/CurrentDeals/CurrentDeals";
+import { ArchiveDeals } from "./ui/ArchiveDeals/ArchiveDeals";
 
-const tabs = ["Текущие сделки", "Архив сделок", "Архив результатов"];
+const tabs = ["Текущие сделки", "Архив результатов"];
 
 export const Transactions = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -36,8 +37,9 @@ export const Transactions = () => {
             <TabPanel>
               <CurrentDeals />
             </TabPanel>
-            <TabPanel>Архив сделок</TabPanel>
-            <TabPanel>Архив результатов</TabPanel>
+            <TabPanel>
+              <ArchiveDeals />
+            </TabPanel>
           </Tabs>
         </div>
       </div>

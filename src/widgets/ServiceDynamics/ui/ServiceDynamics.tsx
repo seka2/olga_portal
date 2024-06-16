@@ -17,6 +17,8 @@ import { SelectFilter } from "shared/ui/SelectFilter/SelectFilter";
 import { Option } from "shared/types/Options";
 
 import classes from "./ServiceDynamics.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
 
 ChartJS.register(
   CategoryScale,
@@ -40,11 +42,11 @@ const options = {
     tooltip: {
       displayColors: false,
       backgroundColor: "#1D2B43",
-      titleFont: { weight: 600, size: 8 },
-      bodyFont: { weight: 300, size: 6 },
+      titleFont: { weight: 600, size: 10 },
+      bodyFont: { weight: 300, size: 12 },
       callbacks: {
-        title: (context: any) => `${prices[context[0].dataIndex]} ₽`,
-        label: (context: any) => `Продано ${orders[context.dataIndex]} ордеров`,
+        title: (context: any) => context[0].label,
+        label: (context: any) => context['raw'] > 0 ? "+" + context['raw'] + "%" : context['raw'] + "%",
       },
     },
   },
@@ -59,51 +61,73 @@ const options = {
   },
 };
 
-const data = {
-  labels: [
-    "31.03.2023 г.",
-    "01.04.2023 г.",
-    "02.04.2023 г.",
-    "03.04.2023 г.",
-    "04.04.2023 г.",
-    "05.04.2023 г.",
-    "06.04.2023 г.",
-  ],
-  datasets: [
-    {
-      fill: true,
-      data: [8, 27, 50, 72, 24, 46, 65, 100],
-      borderColor: "#01D8DD",
-      backgroundColor: "rgba(1, 216, 221, 0.2)",
-    },
-  ],
-};
-
 const dayOptions = [
-  { value: "Сегодня", label: "Сегодня" },
-  { value: "Завтра", label: "Завтра" },
+  { value: "3_months", label: "3 месяца" },
+  { value: "6_months", label: "6 месяцев" },
+  { value: "9_months", label: "9 месяцев" },
+  { value: "12_months", label: "12 месяцев" },
 ];
 
-const prices: number[] = [25000, 26000, 27000, 28000, 29000, 30000, 31000];
-const orders: number[] = [300, 310, 320, 330, 340, 350, 360];
-
 export const ServiceDynamics = () => {
-  const [selected, setSelected] = useState<Option>();
+  const stat = useSelector((state: RootState) => state.site.stat);
+
+
+  const [selected, setSelected] = useState<Option>(dayOptions[3]); // Default to 12 months
+
   console.log("selected: ", selected);
 
+  const selectedPeriod = selected?.value;
+  const dynamicKey = selectedPeriod ? `${selectedPeriod}` : '12_months';
+
+  const isDynamicKey = (key: any): key is keyof typeof stat.dynamic => {
+    return key === "3_months" || key === "6_months" || key === "9_months" || key === "12_months";
+  };
+
+  if (stat && stat.dynamic && isDynamicKey(dynamicKey) && stat.dynamic[dynamicKey]) {
+    const data = {
+      labels: stat.dynamic[dynamicKey].labels,
+      datasets: [
+        {
+          fill: true,
+          data: stat.dynamic[dynamicKey].data,
+          borderColor: "#01D8DD",
+          backgroundColor: "rgba(1, 216, 221, 0.2)",
+        },
+      ],
+    };
+
+    return (
+      <div className={classes.schedule}>
+        <div className={classes.overlay}>
+          <div className={classes.body}>
+            <div className={classes.header}>
+              <div className={classes.title}>Динамика сервиса</div>
+              <SelectFilter options={dayOptions} onChange={setSelected} selectedIndex={3} />
+            </div>
+            <div className={classes.chart}>
+              <Line options={options} data={data} />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  
   return (
     <div className={classes.schedule}>
       <div className={classes.overlay}>
         <div className={classes.body}>
           <div className={classes.header}>
             <div className={classes.title}>Динамика сервиса</div>
-            <SelectFilter options={dayOptions} onChange={setSelected} />
+            <SelectFilter options={dayOptions} onChange={setSelected} selectedIndex={3} />
           </div>
           <div className={classes.chart}>
-            <Line options={options} data={data} />
+       
           </div>
         </div>
       </div>
     </div>
   );
+
 };

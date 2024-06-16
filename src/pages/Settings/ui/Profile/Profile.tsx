@@ -5,38 +5,91 @@ import { FormikField } from "shared/ui/FormikField/FormikField";
 import { FormikUpload } from "shared/ui/FormikUpload/FormikUpload";
 
 import classes from "./Profile.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
+import { useEffect, useState } from "react";
+import { changeUserProfile } from "http/userAPI";
+import useAppDispatch from "hooks/useAppDispatch";
+import { jwtDecode } from "jwt-decode";
+import { showAlertDanger, showAlertSuccess } from "reducers/thunks";
+import { setUser } from "reducers/siteReducer";
 
-const initialValues = {
-  name: "",
-  email: "",
-  photo: "",
-};
+
+interface FormValues {
+  name: string;
+  photo: string;
+}
+
 
 export const Profile = () => {
-  return (
-    <div className={classes.profile}>
-      <Formik initialValues={initialValues} onSubmit={console.log}>
-        <Form>
-          <div className={classes.fields}>
-            <FormikField
-              className={classes.input}
-              name="name"
-              placeholder="Введите ваше ФИО"
-            />
-            <FormikField
-              className={classes.input}
-              name="email"
-              placeholder="Введите ваш Email"
-            />
-          </div>
-          <div className={classes.bottom}>
-            <FormikUpload className={classes.upload} name="photo" />
-            <Button className={classes.button} type="submit">
-              Сохранить
-            </Button>
-          </div>
-        </Form>
-      </Formik>
-    </div>
-  );
+
+  const user = useSelector((state : RootState) => state.site.user);
+
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = async (values : FormValues) => {
+
+    const { name, photo } = values;
+
+    try {
+      let data = await changeUserProfile(name, photo);
+      if (data.result) {
+        let user = jwtDecode(data.token);
+        dispatch(setUser(user)) ;
+        dispatch(showAlertSuccess("Данные успешно изменены!"));
+      } else {
+        data.error = data.error ?? "Ошибка";
+        dispatch(showAlertDanger(data.error));
+      }
+    } catch (e) {
+      dispatch(showAlertDanger("Неизвестная ошибка, попробуйте снова."));
+    }
+
+  }
+
+  
+  const [initialValues, setInitialValues] = useState({
+    name: "",
+    photo: "",
+  });
+
+  useEffect(() => {
+    if (user) {
+      setInitialValues({
+        name: user.name || "",
+        photo: user.photo || "",
+      });
+    }
+  }, [user]);
+
+  
+  if (user && user.email != '') {
+    return (
+      <div className={classes.profile}>
+        <Formik 
+          initialValues={initialValues} 
+          onSubmit={handleSubmit}
+          enableReinitialize
+        >
+          <Form>
+            <div className={classes.fields}>
+              <FormikField
+                className={classes.input}
+                name="name"
+                placeholder="Имя Фамилия"
+              />
+            </div>
+            <div className={classes.bottom}>
+              <FormikUpload className={classes.upload} name="photo" />
+              <Button className={classes.button} type="submit">
+                Сохранить
+              </Button>
+            </div>
+          </Form>
+        </Formik>
+      </div>
+    );
+  }
+
+  return (<></>);
 };

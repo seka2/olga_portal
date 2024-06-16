@@ -42,7 +42,7 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = (props) => {
         strokeWidth="6"
       />
 
-      {progress && (
+      {true && (
         <>
           <circle
             cx={size / 2}
@@ -84,12 +84,12 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = (props) => {
             fontWeight="700"
             fill="#1D2B43"
           >
-            {progress} %
+            {(progress > 0 ? "+" + progress : progress)} %
           </text>
         </>
       )}
 
-      {!progress && (
+      {false && (
         <>
           <text
             x={size / 2}

@@ -12,12 +12,16 @@ interface NotificationsProps {
 export const Notifications: React.FC<NotificationsProps> = (props) => {
   const { className = "" } = props;
 
-  const [notifications, setNotifications] = useState([
+  /*const [notifications, setNotifications] = useState([
     {
       text: "У вас завершается подписка у вас завершается подписка завершается ",
       link: "https://www.google.com/",
     },
-  ]);
+  ]);*/
+
+  
+  const [notifications, setNotifications] = useState([]);
+
 
   const handleClose = (index: number) => {
     const updatedNotifications = notifications.filter((_, i) => i !== index);

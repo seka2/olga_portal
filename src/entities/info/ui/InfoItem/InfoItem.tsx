@@ -19,11 +19,14 @@ export const InfoItem: React.FC<InfoItemProps> = (props) => {
           <DateIcon />
           <span>{date}</span>
         </div>
-        <div className={classes.text}>{text}</div>
+        <div
+          className={classes.text}
+          dangerouslySetInnerHTML={{ __html: text }}
+        ></div>
       </div>
       <div className={classes.info}>
         <HeroIcon />
-        <a className={classes.link} href={link} target="_blank">
+        <a className={classes.link} href={link} target="_blank" rel="noopener noreferrer">
           Перейти
         </a>
       </div>

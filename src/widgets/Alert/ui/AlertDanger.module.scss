@@ -1,0 +1,11 @@
+.alert {
+  position: fixed;
+  z-index: 1000000;
+  right: 20px;
+  bottom: 20px;
+  padding: 15px 40px;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: rgb(255,230,230);
+  color: rgb(161, 73, 73);
+}

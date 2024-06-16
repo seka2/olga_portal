@@ -10,6 +10,8 @@
       "*": ["./src/*"]
     },
 
+    "noEmitOnError": true, 
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

@@ -8,6 +8,7 @@ import classes from "./Auth.module.scss";
 import { AuthBody } from "./ui/AuthBody/AuthBody";
 import { AuthMobile } from "./ui/AuthMobile/AuthMobile";
 import { AuthMobileForm } from "./ui/AuthMobileForm/AuthMobileForm";
+import { AlertDanger, AlertSuccess } from "widgets/Alert";
 
 export const Auth = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -28,6 +29,8 @@ export const Auth = () => {
           <AuthForm isRegistration />
         </TabPanel>
       </Tabs>
+      <AlertDanger/>
+      <AlertSuccess/>
     </div>
   );
 

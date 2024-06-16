@@ -7,6 +7,7 @@ import { HeaderMobile } from "./HeaderMobile/HeaderMobile";
 import { Help } from "./Help";
 import classes from "./Layout.module.scss";
 import { Sidebar } from "./Sidebar/Sidebar";
+import { AlertDanger, AlertSuccess } from "widgets/Alert";
 
 interface LayoutProps {
   secondary?: boolean;
@@ -25,6 +26,8 @@ export const Layout: React.FC<LayoutProps> = (props) => {
         <Outlet />
         <Help />
       </div>
+      <AlertDanger/>
+      <AlertSuccess/>
     </div>
   );
 };

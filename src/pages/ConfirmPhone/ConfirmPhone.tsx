@@ -13,8 +13,18 @@ import confirmImage from "./assets/confirm-bg.png";
 import classes from "./ConfirmPhone.module.scss";
 import { AccountCreatedSuccessfully } from "./ui/AccountCreatedSuccessfully/AccountCreatedSuccessfully";
 import { ProgressBar } from "shared/ui/ProgressBar/ProgressBar";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
+import { finishLogin, finishRegistration } from 'http/userAPI';
+import useAppDispatch from "hooks/useAppDispatch";
+import { setConfirmPassword, setIsAuth, setName, setPassword, setUser } from "reducers/siteReducer";
+import { showAlertDanger } from "reducers/thunks";
+import { jwtDecode } from "jwt-decode";
+import { AlertDanger, AlertSuccess } from "widgets/Alert";
+
 
 export const ConfirmPhone = () => {
+
   const [isCreated, setCreated] = useState(false);
   const [codes, setCodes] = useState(Array(6).fill(""));
   const inputRefs = Array(6)
@@ -22,6 +32,14 @@ export const ConfirmPhone = () => {
     .map(() => useRef<HTMLInputElement | null>(null));
   const isMobile = useMediaQuery("(max-width: 767px)");
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+
+  const email = useSelector((state: RootState) => state.site.email);
+  const password = useSelector((state: RootState) => state.site.password);
+  const confirm_password = useSelector((state: RootState) => state.site.confirm_password);
+  const name = useSelector((state: RootState) => state.site.name);
+  const isRegistration = useSelector((state: RootState) => state.site.isRegistration);
 
   const handleChange =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,9 +63,45 @@ export const ConfirmPhone = () => {
 
   const handleBack = () => navigate("/auth");
 
-  const handleConfirm = () => {
-    console.log("codes: ", codes.join(""));
-    setCreated(true);
+  const handleConfirm = async () => {
+    const code = codes.join("");
+
+    if (isRegistration) {
+      try {
+        let data = await finishRegistration(email, password, confirm_password, name, code);
+        if (data.result) {
+          let user = jwtDecode(data.token);
+          dispatch(setPassword(""));
+          dispatch(setConfirmPassword(""));
+          dispatch(setName(""));
+          dispatch(setIsAuth(true));
+          dispatch(setUser(user)) ;
+          setCreated(true);
+        } else {
+          data.error = data.error ?? "Ошибка";
+          dispatch(showAlertDanger(data.error));
+        }
+      } catch (e) {
+        dispatch(showAlertDanger("Неизвестная ошибка. Попробуйте снова."));
+      }
+    } else {
+      try {
+        let data = await finishLogin(email, password, code);
+        if (data.result) {
+          let user = jwtDecode(data.token);
+          dispatch(setPassword(""));
+          dispatch(setIsAuth(true));
+          dispatch(setUser(user)) ;
+          setCreated(true);
+        } else {
+          data.error = data.error ?? "Ошибка";
+          dispatch(showAlertDanger(data.error));
+        }
+      } catch (e) {
+        dispatch(showAlertDanger("Неизвестная ошибка. Попробуйте снова."));
+      }
+    }
+
   };
 
   const progressBar = <ProgressBar className={classes.progress} value={100} />;
@@ -79,9 +133,9 @@ export const ConfirmPhone = () => {
       )}
       <div className={classes.body}>
         <form className={classes.form}>
-          <div className={classes.title}>Подтвердите свой номер телефона</div>
+          <div className={classes.title}>Подтвердите свой email</div>
           <div className={classes.subtitle}>
-            Мы отправили 6-ти значный код на номер +8 888 670 99 02
+            Мы отправили 6-ти значный код на Email адрес: { email }
           </div>
           <div className={classes.inputs}>
             {codes.map((code, index) => (
@@ -113,6 +167,10 @@ export const ConfirmPhone = () => {
           {!isMobile && progressBar}
         </form>
       </div>
+
+      <AlertDanger/>
+      <AlertSuccess/>
+
     </div>
   );
 };

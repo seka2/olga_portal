@@ -1,57 +1,41 @@
 import { InfoCard } from "entities/info";
 
 import classes from "./HelpfulInfo.module.scss";
-
-const analytics = [
-  {
-    date: "21.02.2024",
-    text: "➡️ Что рассмотреть после вчерашнего пролива рынка?",
-    link: "https://www.google.com/",
-  },
-  {
-    date: "21.02.2024",
-    text: "➡️ Что рассмотреть после вчерашнего пролива рынка?",
-    link: "https://www.google.com/",
-  },
-  {
-    date: "21.02.2024",
-    text: "➡️ Что рассмотреть после вчерашнего пролива рынка?",
-    link: "https://www.google.com/",
-  },
-];
-
-const materials = [
-  {
-    date: "21.02.2024",
-    text: "⚡️ Магия Фибоначи в анализе.",
-    link: "https://www.google.com/",
-  },
-  {
-    date: "21.02.2024",
-    text: "🔥 Как правильно строить Фибо сетку?",
-    link: "https://www.google.com/",
-  },
-  {
-    date: "21.02.2024",
-    text: "🔥 Как правильно строить Фибо сетку?",
-    link: "https://www.google.com/",
-  },
-];
+import { useEffect, useState } from "react";
+import { getFreeAnalytics, getFreeEducation } from "http/siteApi";
 
 export const HelpfulInfo = () => {
+
+  const [analytics, setAnalytics] = useState([]);
+  const [materials, setMaterials] = useState([]);
+
+  const __load_async = async() => {
+
+    let analyticsData = await getFreeAnalytics();
+    setAnalytics(analyticsData);
+    
+    let educationData = await getFreeEducation();
+    setMaterials(educationData);
+    
+  }
+
+  useEffect(() => {
+    __load_async();
+  }, []);
+
   return (
     <div className={classes.help}>
       <h2 className={classes.title}>Полезная информация</h2>
       <div className={classes.items}>
         <InfoCard
-          title="Свежая аналитика"
+          title="Бесплатная аналитика"
           list={analytics}
-          onClick={console.log}
+          more={"https://wise-olga.ru/analytics"}
         />
         <InfoCard
           title="Обучающие материалы"
           list={materials}
-          onClick={console.log}
+          more={"https://wise-olga.ru/training-materials"}
         />
       </div>
     </div>

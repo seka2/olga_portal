@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import DownDirectionIcon from "shared/assets/icons/down-dir.svg?react";
 import SortingIcon from "shared/assets/icons/sorting.svg?react";
@@ -8,151 +8,62 @@ import NotesIcon from "shared/assets/icons/notes.svg?react";
 import { Status, StatusType } from "shared/ui/Status/Status";
 
 import classes from "./TransactionsTable.module.scss";
+import { getSignals } from "http/siteApi";
+import { SignalDeal } from "types/signals";
 
 function getTextColor(result: string) {
-  return parseFloat(result) < 0 ? "#B3004F" : "#00817A";
+  return result == 'red' ? "#B3004F" : "#00817A";
 }
 
-export const TransactionsTable = () => {
+interface TransactionsTableProps {
+  search: string;
+}
+
+export const TransactionsTable = (props: TransactionsTableProps) => {
+
+  const { search } = props;
+
   const [sortDirection, setSortDirection] = useState("asc");
-  const [deals, setDeals] = useState([
-    {
-      number: 1,
-      id: 2031,
-      tool: "Сбербанк",
-      direction: "up",
-      status: "IN_PROGRESS",
-      opening: "11.02.2024 г. ",
-      risk: "1,5%",
-      entryPrice: "203.45₽",
-      stop: "184.21₽",
-      profitOne: "214.45₽",
-      profitTwo: "-",
-      profitThree: "-",
-      priceBeginningOfMonth: "714.45₽",
-      priceClosing: "714.45₽",
-      volumeLot: "1",
-      volumeRub: "714.45₽",
-      share: "+12,5%",
-      resultMonth: "+12,5%",
-      resultFromOpening: "+12,5%",
-    },
-    {
-      number: 2,
-      id: 2032,
-      tool: "Сбербанк",
-      direction: "up",
-      status: "IN_PROGRESS",
-      opening: "16.02.2024 г. ",
-      risk: "1,5%",
-      entryPrice: "203.45₽",
-      stop: "184.21₽",
-      profitOne: "214.45₽",
-      profitTwo: "-",
-      profitThree: "-",
-      priceBeginningOfMonth: "714.45₽",
-      priceClosing: "714.45₽",
-      volumeLot: "1,3",
-      volumeRub: "714.45₽",
-      share: "+12,5%",
-      resultMonth: "+102,5%",
-      resultFromOpening: "+12,5%",
-      active: true,
-    },
-    {
-      number: 3,
-      id: 2033,
-      tool: "Транснефть АП",
-      direction: "down",
-      status: "CLOSED",
-      opening: "19.02.2024 г. ",
-      risk: "1,5%",
-      entryPrice: "203.45₽",
-      stop: "184.21₽",
-      profitOne: "214.45₽",
-      profitTwo: "-",
-      profitThree: "-",
-      priceBeginningOfMonth: "714.45₽",
-      priceClosing: "714.45₽",
-      volumeLot: "0,1",
-      volumeRub: "714.45₽",
-      share: "+12,5%",
-      resultMonth: "-3,5%",
-      resultFromOpening: "-3,5%",
-    },
-    {
-      number: 4,
-      id: 2034,
-      tool: "Транснефть АП",
-      direction: "down",
-      status: "CANCEL",
-      opening: "01.09.2024 г. ",
-      risk: "1,5%",
-      entryPrice: "203.45₽",
-      stop: "184.21₽",
-      profitOne: "214.45₽",
-      profitTwo: "-",
-      profitThree: "-",
-      priceBeginningOfMonth: "714.45₽",
-      priceClosing: "714.45₽",
-      volumeLot: "6",
-      volumeRub: "714.45₽",
-      share: "+12,5%",
-      resultMonth: "-21,5%",
-      resultFromOpening: "-21,5%",
-    },
-    {
-      number: 5,
-      id: 2035,
-      tool: "Сбербанк",
-      direction: "up",
-      status: "CANCEL",
-      opening: "21.12.2024 г. ",
-      risk: "1,5%",
-      entryPrice: "203.45₽",
-      stop: "184.21₽",
-      profitOne: "214.45₽",
-      profitTwo: "-",
-      profitThree: "-",
-      priceBeginningOfMonth: "714.45₽",
-      priceClosing: "714.45₽",
-      volumeLot: "1",
-      volumeRub: "714.45₽",
-      share: "+12,5%",
-      resultMonth: "+32,1%",
-      resultFromOpening: "+12,5%",
-      active: true,
-    },
-    {
-      number: 6,
-      id: 2036,
-      tool: "Транснефть АП",
-      direction: "up",
-      status: "ORDER",
-      opening: "14.06.2024 г. ",
-      risk: "1,5%",
-      entryPrice: "203.45₽",
-      stop: "184.21₽",
-      profitOne: "214.45₽",
-      profitTwo: "-",
-      profitThree: "-",
-      priceBeginningOfMonth: "714.45₽",
-      priceClosing: "714.45₽",
-      volumeLot: "3",
-      volumeRub: "714.45₽",
-      share: "+12,5%",
-      resultMonth: "+23,9%",
-      resultFromOpening: "+12,5%",
-    },
-  ]);
+  const [result, setResult] = useState({
+    closed_amount: "",
+    pr_profit: "",
+    summ_deposit: "",
+    opened_deals: "",
+    rent_pr: "",
+    itog_d_all: "",
+  })
+
+  const [deals, setDeals] = useState([]);
+
+  const getSignalDeals = async () => {
+    const data = await getSignals({ search });
+    if (data.result) {
+      setDeals(data.deals);
+      setResult(data.statistic);
+    }
+    return data;
+  }
+
+  const __load_async = async() => {
+    try {
+      await getSignalDeals();
+    } catch (e) {
+
+    }
+  }
+
+  useEffect(() => {
+    __load_async();
+  }, [search]);
+  
 
   const handleSort = () => {
     if (sortDirection === "asc") {
       setSortDirection("desc");
-      setDeals((prev) => [...prev.sort((a, b) => b.id - a.id)]);
+      // setDeals((prev) => [...prev.sort((a, b) => b.id - a.id)]);
     } else {
       setSortDirection("asc");
-      setDeals((prev) => [...prev.sort((a, b) => a.id - b.id)]);
+      // setDeals((prev) => [...prev.sort((a, b) => a.id - b.id)]);
     }
   };
 
@@ -166,7 +77,7 @@ export const TransactionsTable = () => {
                 <th>
                   <div className={classes.head} onClick={handleSort}>
                     <span>#</span>
-                    <SortingIcon />
+                    { false && <SortingIcon /> }
                   </div>
                 </th>
                 <th>ID</th>
@@ -185,25 +96,23 @@ export const TransactionsTable = () => {
                 <th>ПРОФИТ №1</th>
                 <th>ПРОФИТ №2</th>
                 <th>ПРОФИТ №3</th>
-                <th>Цена (начало месяца)</th>
-                <th>Цена (закрытие)</th>
+                <th>Цена (закрытие или текущая)</th>
                 <th>Объем (лот)</th>
                 <th>Объем (руб.)</th>
                 <th>Доля, %</th>
-                <th>Результат,% (месяц)</th>
-                <th>Результат,% (с открытия)</th>
+                <th>Результат,%</th>
               </tr>
             </thead>
             <tbody>
-              {deals.map((item) => (
+              {deals.map((item : SignalDeal) => (
                 <tr key={item.id}>
                   <td>{item.number}</td>
                   <td>{item.id}</td>
-                  <td className={item.active ? classes.active : ""}>
+                  <td>
                     {item.tool}
                   </td>
                   <td>
-                    {item.direction === "up" ? (
+                    {item.diraction === "up" ? (
                       <UpDirectionIcon />
                     ) : (
                       <DownDirectionIcon />
@@ -228,48 +137,48 @@ export const TransactionsTable = () => {
                   <td>{item.profitOne}</td>
                   <td>{item.profitTwo}</td>
                   <td>{item.profitThree}</td>
-                  <td>{item.priceBeginningOfMonth}</td>
                   <td>{item.priceClosing}</td>
                   <td>{item.volumeLot}</td>
                   <td>{item.volumeRub}</td>
                   <td>{item.share}</td>
-                  <td style={{ color: getTextColor(item.resultMonth) }}>
-                    {item.resultMonth}
-                  </td>
-                  <td style={{ color: getTextColor(item.resultMonth) }}>
+                  <td style={{ color: getTextColor(item.colorResult) }}>
                     {item.resultFromOpening}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
           <div className={classes.footer}>
             <div className={classes.items}>
+              { false && (
               <div className={classes.item}>
                 <div className={classes.label}>
                   Количество закрытых сделок -{" "}
                 </div>
-                <div className={classes.value}>21 шт.</div>
+                <div className={classes.value}>{ result.closed_amount }</div>
               </div>
+              ) }
               <div className={classes.item}>
                 <div className={classes.label}>Прибыльных сделок - </div>
-                <div className={classes.value}>57%</div>
+                <div className={classes.value}>{ result.pr_profit }</div>
               </div>
             </div>
+            
             <div className={classes.items}>
               <div className={classes.item}>
                 <div className={classes.label}>Ваш депозит - </div>
-                <div className={classes.value}>1 000 000 рублей</div>
+                <div className={classes.value}>{ result.summ_deposit }</div>
               </div>
               <div className={classes.item}>
                 <div className={classes.label}>Открытые сделки - </div>
-                <div className={classes.value}>1 500 000 рублей</div>
+                <div className={classes.value}>{ result.opened_deals }</div>
               </div>
               <div className={classes.item}>
                 <div className={classes.label}>Заемные средства - </div>
-                <div className={classes.value}>64%</div>
+                <div className={classes.value}>{ result.rent_pr }</div>
               </div>
-              <div className={classes.result}>Результат +4.53%</div>
+              <div className={classes.result}>Результат { result.itog_d_all }</div>
             </div>
           </div>
         </div>

@@ -5,7 +5,9 @@ import ChevronDownIcon from "shared/assets/icons/chevron-down.svg?react";
 import classes from "./Faq.module.scss";
 
 import "./Faq.scss";
-
+import { useEffect, useState } from "react";
+import { getFaq } from "http/siteApi";
+/*
 const faq = [
   {
     title: "Accordion header one",
@@ -22,10 +24,25 @@ const faq = [
   {
     title: "Accordion header four",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci.",
-  },
+  }, 
 ];
+*/
 
 export const Faq = () => {
+  
+  const [faq, setFaq] = useState([]);
+
+
+  const __load_async = async() => {
+    let faqData = await getFaq();
+    console.log(faqData);
+    setFaq(faqData);
+  }
+
+  useEffect(() => {
+    __load_async();
+  }, []);  
+
   return (
     <div className={classes.faq}>
       <div className="container">
@@ -34,7 +51,7 @@ export const Faq = () => {
           <Accordion
             className={classes.items}
             transition
-            transitionTimeout={250}
+            transitionTimeout={250} 
           >
             {faq.map(({ title, text }) => (
               <AccordionItem
@@ -47,7 +64,10 @@ export const Faq = () => {
                   </>
                 }
               >
-                {text}
+                <div
+                  className={classes.text}
+                  dangerouslySetInnerHTML={{ __html: text }}
+                ></div>
               </AccordionItem>
             ))}
           </Accordion>

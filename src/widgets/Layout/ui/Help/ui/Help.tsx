@@ -1,5 +1,5 @@
 import TelegramIcon from "shared/assets/icons/telegram.svg?react";
-import VkIcon from "shared/assets/icons/vk.svg?react";
+import YoutubeIcon from "shared/assets/icons/youtube.svg?react";
 
 import classes from "./Help.module.scss";
 
@@ -17,17 +17,17 @@ export const Help = () => {
           <div className={classes.links}>
             <a
               className={classes.link}
-              href="https://www.google.com/"
+              href="https://t.me/+G5iiOnpZUOwzYjMy"
               target="_blank"
             >
               <TelegramIcon />
             </a>
             <a
               className={classes.link}
-              href="https://www.google.com/"
+              href="https://www.youtube.com/@wise-olga"
               target="_blank"
             >
-              <VkIcon />
+              <YoutubeIcon />
             </a>
           </div>
         </div>
