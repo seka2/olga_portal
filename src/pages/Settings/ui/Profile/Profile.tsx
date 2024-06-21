@@ -10,9 +10,10 @@ import { RootState } from "store";
 import { useEffect, useState } from "react";
 import { changeUserProfile } from "http/userAPI";
 import useAppDispatch from "hooks/useAppDispatch";
-import { jwtDecode } from "jwt-decode";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 import { showAlertDanger, showAlertSuccess } from "reducers/thunks";
 import { setUser } from "reducers/siteReducer";
+import { User } from "shared/types/Common";
 
 
 interface FormValues {
@@ -34,7 +35,9 @@ export const Profile = () => {
     try {
       let data = await changeUserProfile(name, photo);
       if (data.result) {
-        let user = jwtDecode(data.token);
+        let decodedToken = jwtDecode<JwtPayload>(data.token);
+        let user = decodedToken as User;
+
         dispatch(setUser(user)) ;
         dispatch(showAlertSuccess("Данные успешно изменены!"));
       } else {

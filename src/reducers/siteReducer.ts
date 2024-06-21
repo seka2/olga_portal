@@ -1,17 +1,6 @@
 // siteSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface User {
-  name: string, 
-  email: string,
-  user_id: number,
-  tg_code: string,
-  tg_chat_id: number,
-  deposit_amount_12: number,
-  deposit_risk_12: number,
-  photo: string,
-  status: number,
-}
+import { User } from 'shared/types/Common';
 
 interface GraphItem {
   data: number[],
@@ -64,6 +53,7 @@ interface SiteState {
   alert_danger_message: string;
   token: string;
   stat: Stat;
+  selectedMaterialId: number;
 }
 
 const user = {
@@ -146,7 +136,8 @@ const initialState: SiteState = {
         average_profit_per_trade: 0,
       },
     }
-  }
+  },
+  selectedMaterialId: 0,
 };
 
 const siteSlice = createSlice({
@@ -198,6 +189,9 @@ const siteSlice = createSlice({
     },
     setStat: (state, action: PayloadAction<Stat>) => {
       state.stat = action.payload;
+    },
+    setSelectedMaterialId: (state, action: PayloadAction<number>) => {
+      state.selectedMaterialId = action.payload;
     }
   },
 });
@@ -217,6 +211,7 @@ export const {
   setAuthStep,
   setIsRegistration,
   setStat,
+  setSelectedMaterialId,
 } = siteSlice.actions;
 
 export default siteSlice.reducer;

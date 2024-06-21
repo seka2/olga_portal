@@ -19,12 +19,11 @@ import { finishLogin, finishRegistration } from 'http/userAPI';
 import useAppDispatch from "hooks/useAppDispatch";
 import { setConfirmPassword, setIsAuth, setName, setPassword, setUser } from "reducers/siteReducer";
 import { showAlertDanger } from "reducers/thunks";
-import { jwtDecode } from "jwt-decode";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 import { AlertDanger, AlertSuccess } from "widgets/Alert";
-
+import { User } from "shared/types/Common";
 
 export const ConfirmPhone = () => {
-
   const [isCreated, setCreated] = useState(false);
   const [codes, setCodes] = useState(Array(6).fill(""));
   const inputRefs = Array(6)
@@ -33,7 +32,6 @@ export const ConfirmPhone = () => {
   const isMobile = useMediaQuery("(max-width: 767px)");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
 
   const email = useSelector((state: RootState) => state.site.email);
   const password = useSelector((state: RootState) => state.site.password);
@@ -45,11 +43,20 @@ export const ConfirmPhone = () => {
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
       const newCodes = [...codes];
-      newCodes[index] = value;
+
+      if (value.length === 1) {
+        newCodes[index] = value;
+      } else if (value.length === 6) {
+        value.split("").forEach((char, i) => {
+          newCodes[i] = char;
+        });
+      }
 
       setCodes(newCodes);
 
-      if (value && index < 5 && inputRefs[index + 1]?.current) {
+      if (value.length === 6) {
+        inputRefs[5]?.current?.focus();
+      } else if (value && index < 5 && inputRefs[index + 1]?.current) {
         inputRefs[index + 1]?.current?.focus();
       }
     };
@@ -57,6 +64,30 @@ export const ConfirmPhone = () => {
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const charCode = e.charCode;
     if (charCode < 48 || charCode > 57) {
+      e.preventDefault();
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    if (e.key === 'Backspace') {
+      const newCodes = [...codes];
+      if (newCodes[index] === "") {
+        if (index > 0) {
+          newCodes[index - 1] = "";
+          inputRefs[index - 1]?.current?.focus();
+        }
+      } else {
+        newCodes[index] = "";
+      }
+      setCodes(newCodes);
+    }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const paste = e.clipboardData.getData('text');
+    if (paste.length === 6 && /^\d+$/.test(paste)) {
+      setCodes(paste.split(""));
+      inputRefs[5]?.current?.focus();
       e.preventDefault();
     }
   };
@@ -70,7 +101,10 @@ export const ConfirmPhone = () => {
       try {
         let data = await finishRegistration(email, password, confirm_password, name, code);
         if (data.result) {
-          let user = jwtDecode(data.token);
+          
+          let decodedToken = jwtDecode<JwtPayload>(data.token);
+          let user = decodedToken as User;
+
           dispatch(setPassword(""));
           dispatch(setConfirmPassword(""));
           dispatch(setName(""));
@@ -88,7 +122,10 @@ export const ConfirmPhone = () => {
       try {
         let data = await finishLogin(email, password, code);
         if (data.result) {
-          let user = jwtDecode(data.token);
+          
+          let decodedToken = jwtDecode<JwtPayload>(data.token);
+          let user = decodedToken as User;
+
           dispatch(setPassword(""));
           dispatch(setIsAuth(true));
           dispatch(setUser(user)) ;
@@ -101,7 +138,6 @@ export const ConfirmPhone = () => {
         dispatch(showAlertDanger("Неизвестная ошибка. Попробуйте снова."));
       }
     }
-
   };
 
   const progressBar = <ProgressBar className={classes.progress} value={100} />;
@@ -152,6 +188,8 @@ export const ConfirmPhone = () => {
                   value={code}
                   onChange={handleChange(index)}
                   onKeyPress={handleKeyPress}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
+                  onPaste={index === 0 ? handlePaste : undefined}
                 />
               </div>
             ))}

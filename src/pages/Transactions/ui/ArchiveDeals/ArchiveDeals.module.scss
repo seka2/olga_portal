@@ -134,6 +134,7 @@
   border-collapse: collapse;
   border: 1px solid rgb(220,220,220);
   border-radius: 10px;
+  font-size: 14px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -150,7 +151,7 @@
   padding: 4px 0 9px 0;
   border-top: 1px solid #00142c;
   background: rgb(139,244,247);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
 }
 
@@ -169,6 +170,7 @@
 .results table tbody tr.bluedark td {
   background: rgb(254,44,137);
   font-weight: 500;
+  font-size: 14px;
   color: #fff;
 }
 

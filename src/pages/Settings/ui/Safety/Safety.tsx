@@ -7,7 +7,8 @@ import { showAlertDanger, showAlertSuccess } from "reducers/thunks";
 import useAppDispatch from "hooks/useAppDispatch";
 import { setIsAuth, setPassword, setUser } from "reducers/siteReducer";
 import { changeUserPassword } from "http/userAPI";
-import { jwtDecode } from "jwt-decode";
+import { JwtPayload, jwtDecode } from "jwt-decode";
+import { User } from "shared/types/Common";
 
 interface FormValues {
   currentPassword: string,
@@ -32,7 +33,9 @@ export const Safety = () => {
     try {
       let data = await changeUserPassword(currentPassword, newPassword, confirmPassword);
       if (data.result) {
-        let user = jwtDecode(data.token);
+        let decodedToken = jwtDecode<JwtPayload>(data.token);
+        let user = decodedToken as User;
+
         dispatch(setPassword(""));
         dispatch(setIsAuth(true));
         dispatch(setUser(user)) ;

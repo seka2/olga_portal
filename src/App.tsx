@@ -15,8 +15,9 @@ import { useEffect, useState } from "react";
 import { checkIsAuth } from "./http/userAPI";
 import { setIsAuth, setUser } from "./reducers/siteReducer";
 import useAppDispatch from "./hooks/useAppDispatch";
-import { jwtDecode } from "jwt-decode";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 import { Loader } from "widgets/Loader";
+import { User } from "shared/types/Common";
 
 function App() {
 
@@ -28,7 +29,8 @@ function App() {
     try {
       const data = await checkIsAuth();
       if (data.result && data.token) {
-        let user = jwtDecode(data.token);
+        let decodedToken = jwtDecode<JwtPayload>(data.token);
+        let user = decodedToken as User;
         dispatch(setIsAuth(true));
         dispatch(setUser(user)) ;
       }
@@ -52,6 +54,9 @@ function App() {
       { isAuth && (
         <>
           <Route path="/materials" element={<Layout secondary />}>
+            <Route index element={<Materials />} />
+          </Route>
+          <Route path="/materials/:id" element={<Layout secondary />}>
             <Route index element={<Materials />} />
           </Route>
           <Route path="/" element={<Layout />}>

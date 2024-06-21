@@ -18,6 +18,7 @@
 .item {
   padding: 11px 0;
   border-bottom: 1px solid #cbcbcb;
+  cursor: pointer;
 
   @media screen and (max-width: 992px) {
     padding: 11px 0 28px;
@@ -27,6 +28,27 @@
   }
 }
 
+.item_active {
+  padding: 11px 0;
+  border-bottom: 1px solid #cbcbcb;
+  cursor: pointer;
+
+  @media screen and (max-width: 992px) {
+    padding: 11px 0 28px;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 14px 0;
+  }
+}
+
+
+.item:hover .name {
+  color: #fe2c89;
+}
+
+.item_active .name {
+  font-weight: 600;
+}
 .date {
   display: flex;
   align-items: center;

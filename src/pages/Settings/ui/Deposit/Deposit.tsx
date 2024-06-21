@@ -13,9 +13,10 @@ import { useEffect, useState } from "react";
 import { prettyNumber, prettyNumber10 } from "consts/functions";
 import useAppDispatch from "hooks/useAppDispatch";
 import { changeUserDeposit } from "http/userAPI";
-import { jwtDecode } from "jwt-decode";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 import { setUser } from "reducers/siteReducer";
 import { showAlertDanger, showAlertSuccess } from "reducers/thunks";
+import { User } from "shared/types/Common";
 
 const initialValues = {
   depositAmount: "",
@@ -71,7 +72,9 @@ export const Deposit = () => {
     try {
       let data = await changeUserDeposit(deposit, risk);
       if (data.result) {
-        let user = jwtDecode(data.token);
+        let decodedToken = jwtDecode<JwtPayload>(data.token);
+        let user = decodedToken as User;
+
         dispatch(setUser(user)) ;
         dispatch(showAlertSuccess("Сохранено!"));
       } else {

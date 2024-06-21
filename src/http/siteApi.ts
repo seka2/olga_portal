@@ -32,12 +32,68 @@ export const getAnalytics = async (prop: AnalyticsRequestData = {}): Promise<any
 
 
 
-export const getFaq = async (prop: AnalyticsRequestData = {}): Promise<any> => {
+export const getFaq = async (): Promise<any> => {
   const method = "portalGetFaq";
   try {
     const { data }: AxiosResponse<SharedAuthResponse> = await $authHost.post('request.php', {
+      method
+    });
+    return data;
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    throw error;
+  }
+}
+
+export const getMaterials = async (): Promise<any> => {
+  const method = "portalGetMaterials";
+  try {
+    const { data }: AxiosResponse<SharedAuthResponse> = await $authHost.post('request.php', {
+      method
+    });
+    return data;
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    throw error;
+  }
+}
+
+
+export const getMaterial = async (id: number): Promise<any> => {
+  const method = "portalGetMaterial";
+  try {
+    const { data }: AxiosResponse<SharedAuthResponse> = await $authHost.post('request.php', {
       method,
-      ...prop
+      id
+    });
+    return data;
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    throw error;
+  }
+}
+
+
+export const getNotifications = async (): Promise<any> => {
+  const method = "portalGetNotifications";
+  try {
+    const { data }: AxiosResponse<SharedAuthResponse> = await $authHost.post('request.php', {
+      method,
+    });
+    return data;
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    throw error;
+  }
+}
+
+
+export const setNotificationReaded = async (id: number): Promise<any> => {
+  const method = "portalSetNotificationReaded";
+  try {
+    const { data }: AxiosResponse<SharedAuthResponse> = await $authHost.post('request.php', {
+      method,
+      id
     });
     return data;
   } catch (error) {
