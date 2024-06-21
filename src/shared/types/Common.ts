@@ -20,3 +20,16 @@ export interface User {
   photo: string,
   status: number,
 }
+
+export interface SearchItem {
+  title: string;
+  link: string;
+  id: number;
+  table: string;
+}
+
+export interface SearchSection {
+  section: string;
+  list: SearchItem[];
+}
+

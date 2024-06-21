@@ -10,8 +10,6 @@ interface SharedAuthResponse {
   token?: string;
 }
 
-
-  
   export const restorePasswordData = async (
     password_new: string,
     password_new_confirn: string,

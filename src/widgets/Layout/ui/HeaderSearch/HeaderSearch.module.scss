@@ -3,6 +3,7 @@
   flex-grow: 1;
 }
 
+
 .icon {
   position: absolute;
   top: 50%;
@@ -43,4 +44,26 @@
   &:focus {
     outline: none;
   }
+}
+
+
+.serachResultBlock {
+  position: absolute;
+  z-index: 1000;
+  background-color: white;
+  padding: 15px;
+  border: 1px solid rgb(240,240,240);
+  margin-top: -1px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.section-list {
+  margin-top: 5px; 
+  margin-bottom: 5px;
 }

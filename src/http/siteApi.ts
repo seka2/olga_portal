@@ -197,3 +197,18 @@ export const sendMistake = async (message: string, file: string): Promise<any> =
     throw error;
   }
 }
+
+
+export const getSearchResult = async (search: string): Promise<any> => {
+  const method = "portalSearch";
+  try {
+    const { data }: AxiosResponse<any> = await $authHost.post('request.php', {
+      method,
+      search
+    });
+    return data;
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    throw error;
+  }
+}
