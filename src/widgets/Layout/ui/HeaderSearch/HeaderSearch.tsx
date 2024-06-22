@@ -52,7 +52,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div className={classes.searchWrapper}>
       <div className={clsx(classes.search, className)}>
         <span className={classes.icon}>
           <SearchImage />
@@ -66,24 +66,25 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
           value={value}
           onChange={handleChange}
         />
-      </div>
-
-      {results.length > 0 && value.length > 0 && show && (
-        <div className={classes.serachResultBlock} ref={resultsRef}>
-          {results.map((section: SearchSection, index: number) => (
-            <div key={index}>
-              <div className={classes['section-title']}>{section.section}</div>
-              <div className={classes['section-list']}>
-                {section.list.map((item: SearchItem, itemIndex: number) => (
-                  <div key={itemIndex} onClick={handleClickResultLink}>
-                    <Link to={item.link}>{item.title}</Link>
-                  </div>
-                ))}
+        {results.length > 0 && value.length > 0 && show && (
+          <div className={classes.serachResultBlock} ref={resultsRef}>
+            {results.map((section: SearchSection, index: number) => (
+              <div key={index}>
+                <div className={classes["section-title"]}>
+                  {section.section}
+                </div>
+                <div className={classes["section-list"]}>
+                  {section.list.map((item: SearchItem, itemIndex: number) => (
+                    <div key={itemIndex} onClick={handleClickResultLink}>
+                      <Link to={item.link}>{item.title}</Link>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

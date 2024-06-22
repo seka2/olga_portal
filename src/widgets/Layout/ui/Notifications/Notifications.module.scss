@@ -5,6 +5,12 @@
   cursor: pointer;
 }
 
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .list {
   position: absolute;
   top: 100%;

@@ -35,6 +35,7 @@
       }
       &:nth-child(3) {
         width: 118px;
+        text-align: left;
       }
       &:nth-child(4) {
         width: 424px;
@@ -129,10 +130,10 @@
 .ticker {
   display: flex;
   align-items: center;
-  justify-content: center;
 
   span {
     margin-left: 6px;
+    line-height: 1;
   }
 }
 
