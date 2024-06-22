@@ -18,8 +18,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   const [value, setValue] = useState("");
   const [show, setShow] = useState(false);
   const [results, setResults] = useState<SearchSection[]>([]);
-  const debouncedSearch = useDebounce(value, 1000);
-  const symbols = 2;
+  const debouncedSearch = useDebounce(value, 500); // Задержка в 500 мс
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const resultsRef = useRef<HTMLDivElement | null>(null);
@@ -35,13 +34,10 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   };
 
   const __load_async_search = async () => {
-    if (debouncedSearch.length > symbols) {
-      setResults([]);
-      let data = await getSearchResult(debouncedSearch);
-      if (data.result) {
-        setResults(data.list);
-        if (data.list.length > 0) setShow(true);
-      }
+    let data = await getSearchResult(debouncedSearch);
+    if (data.result) {
+      setResults(data.list);
+      if (data.list.length > 0) setShow(true);
     }
   };
 
@@ -56,7 +52,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div className={classes.searchWrapper}>
       <div className={clsx(classes.search, className)}>
         <span className={classes.icon}>
           <SearchImage />
@@ -70,24 +66,25 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
           value={value}
           onChange={handleChange}
         />
-      </div>
-
-      {results.length > 0 && value.length > symbols && show && (
-        <div className={classes.serachResultBlock} ref={resultsRef}>
-          {results.map((section: SearchSection, index: number) => (
-            <div key={index}>
-              <div className={classes['section-title']}>{section.section}</div>
-              <div className={classes['section-list']}>
-                {section.list.map((item: SearchItem, itemIndex: number) => (
-                  <div key={itemIndex} onClick={handleClickResultLink}>
-                    <Link to={item.link}>{item.title}</Link>
-                  </div>
-                ))}
+        {results.length > 0 && value.length > 0 && show && (
+          <div className={classes.serachResultBlock} ref={resultsRef}>
+            {results.map((section: SearchSection, index: number) => (
+              <div key={index}>
+                <div className={classes["section-title"]}>
+                  {section.section}
+                </div>
+                <div className={classes["section-list"]}>
+                  {section.list.map((item: SearchItem, itemIndex: number) => (
+                    <div key={itemIndex} onClick={handleClickResultLink}>
+                      <Link to={item.link}>{item.title}</Link>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

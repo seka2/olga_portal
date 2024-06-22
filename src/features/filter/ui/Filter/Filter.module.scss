@@ -1,6 +1,6 @@
 .body {
   display: grid;
-  grid-template-columns: 127px 1fr;
+  // grid-template-columns: 127px 1fr; // TODO: убрать если вернуть фильтр
   border: 1px solid #c4c9d2;
   border-radius: 6px;
   box-shadow: 0px 0px 0px 1px rgba(134, 143, 160, 0.16);
