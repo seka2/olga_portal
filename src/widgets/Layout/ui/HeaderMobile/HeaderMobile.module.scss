@@ -30,6 +30,7 @@
 }
 
 .notifications {
+  display: flex;
   margin-right: 28px;
 
   @media screen and (max-width: 767px) {
@@ -65,4 +66,18 @@
 
 .active {
   color: #fe2c89;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+}
+
+.phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

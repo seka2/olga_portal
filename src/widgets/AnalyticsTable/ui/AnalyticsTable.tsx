@@ -13,11 +13,9 @@ interface AnalyticsTableProps {
 }
 
 export const AnalyticsTable: React.FC<AnalyticsTableProps> = (props) => {
-
   // const [sortDirection, setSortDirection] = useState("asc");
 
   const { search } = props;
-
 
   const [posts, setPosts] = useState([]);
   // const [sector, setSector] = useState("");
@@ -31,15 +29,15 @@ export const AnalyticsTable: React.FC<AnalyticsTableProps> = (props) => {
     setPosts(data.posts);
     setTotalPages(data.total_page);
     return data;
-  }
+  };
 
-  const __load_async = async() => {
+  const __load_async = async () => {
     try {
       await getAnalyticPosts();
     } catch (e) {
-
+      console.error(e);
     }
-  }
+  };
 
   useEffect(() => {
     __load_async();
@@ -48,7 +46,6 @@ export const AnalyticsTable: React.FC<AnalyticsTableProps> = (props) => {
   const handlePageClick = (event: { selected: number }) => {
     setPage(event.selected + 1); // react-paginate uses 0-based index
   };
-  
 
   /*const handleSort = () => {
     if (sortDirection === "asc") {
@@ -82,16 +79,10 @@ export const AnalyticsTable: React.FC<AnalyticsTableProps> = (props) => {
               </tr>
             </thead>
             <tbody>
-              {posts.map((item: AnalyticsPost) => {
-
-                console.log(item);
-
-                return (
+              {posts.map((item: AnalyticsPost) => (
                 <tr key={item.post_id}>
                   <td>{item.post_id}</td>
-                  <td>
-                    {item.name}
-                  </td>
+                  <td>{item.name}</td>
                   <td>
                     <div className={classes.ticker}>
                       <TickerIcon />
@@ -101,33 +92,33 @@ export const AnalyticsTable: React.FC<AnalyticsTableProps> = (props) => {
                   <td>{item.sector}</td>
                   <td>
                     {item.graph_link != "" && (
-                      <a href={ item.graph_link } target="_blank">
+                      <a href={item.graph_link} target="_blank">
                         <div className={classes.schedule}>График</div>
                       </a>
                     )}
                   </td>
                 </tr>
-                )})}
+              ))}
             </tbody>
           </table>
         </div>
 
-        <br/>
+        <br />
 
-        
-        { totalPages > 0 && <ReactPaginate
-          breakLabel="..."
-          nextLabel=">"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={2}
-          pageCount={totalPages}
-          previousLabel="<"
-          containerClassName="pagination"
-          activeClassName="active"
-        /> }
+        {totalPages > 0 && (
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={2}
+            pageCount={totalPages}
+            previousLabel="<"
+            containerClassName="pagination"
+            activeClassName="active"
+          />
+        )}
 
-        <br/>
-        
+        <br />
       </div>
     </div>
   );
