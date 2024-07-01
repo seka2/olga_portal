@@ -7,26 +7,6 @@ import classes from "./Faq.module.scss";
 import "./Faq.scss";
 import { useEffect, useState } from "react";
 import { getFaq } from "http/siteApi";
-/*
-const faq = [
-  {
-    title: "Accordion header one",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci.",
-  },
-  {
-    title: "Accordion header two",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci.",
-  },
-  {
-    title: "Accordion header three",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci.",
-  },
-  {
-    title: "Accordion header four",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci.",
-  }, 
-];
-*/
 
 export const Faq = () => {
   
@@ -59,7 +39,7 @@ export const Faq = () => {
                 contentProps={{ className: classes.item }}
                 header={
                   <>
-                    {title}
+                    <div className={classes['item-title']}>{title}</div>
                     <ChevronDownIcon />
                   </>
                 }

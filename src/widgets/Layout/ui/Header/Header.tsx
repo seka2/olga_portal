@@ -9,8 +9,8 @@ export const Header = () => {
       <div className={classes.header}>
         <HeaderSearch className={classes.search} />
         <div className={classes.info}>
-          <a className={classes.phone} href="tel:88003203040">
-            8 (800) 320-30-40
+          <a className={classes.phone} href="tel:88003500857">
+            8 (800) 350-08-57
           </a>
           <Notifications />
         </div>

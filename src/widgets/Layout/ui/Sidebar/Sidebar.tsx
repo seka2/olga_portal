@@ -111,11 +111,11 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
             <span>На рабочий стол</span>
           </Link>
         )}
-        <a className={classes.link} href="tel:88003203040">
-          8 (800) 320-30-40
+        <a className={classes.link} href="tel:88003500857">
+          8 (800) 350-08-57
         </a>
-        <a className={classes.link} href="mailto:customers@wise-olga.ru">
-          customers@wise-olga.ru
+        <a className={classes.link} href="mailto:support@wise-olga.ru">
+          support@wise-olga.ru
         </a>
       </div>
     </div>
