@@ -13,7 +13,9 @@ import { ProgressBar } from "shared/ui/ProgressBar/ProgressBar";
 import { useMediaQuery } from "usehooks-ts";
 import useAppDispatch from "hooks/useAppDispatch"
 import { showAlertDanger } from "reducers/thunks";
-import { setAuthStep, setConfirmPassword, setEmail, setIsRegistration, setName, setPassword } from "reducers/siteReducer";
+import { setAuthStep, setConfirmPassword, setEmail, setIsAuth, setIsRegistration, setName, setPassword, setUser } from "reducers/siteReducer";
+import { JwtPayload, jwtDecode } from "jwt-decode";
+import { User } from "shared/types/Common";
 
 interface AuthFormProps {
   isRegistration?: boolean;
@@ -69,6 +71,8 @@ export const AuthForm: React.FC<AuthFormProps> = (props) => {
 
     } else {
 
+      /*
+
       try {
         let data = await login(email, password);
         if (data.result) {
@@ -83,6 +87,31 @@ export const AuthForm: React.FC<AuthFormProps> = (props) => {
       } catch (e) {
         
       }
+
+      */
+
+
+      try {
+        let data = await login(email, password);
+        if (data.result && data.token) {
+          
+          let decodedToken = jwtDecode<JwtPayload>(data.token);
+          let user = decodedToken as User;
+
+          dispatch(setEmail(email));
+          dispatch(setIsAuth(true));
+          dispatch(setUser(user)) ;
+
+          navigate("/");
+
+        } else {
+          data.error = data.error ?? "Ошибка";
+          dispatch(showAlertDanger(data.error));
+        }
+      } catch (e) {
+        dispatch(showAlertDanger("Неизвестная ошибка. Попробуйте снова."));
+      }
+
       
     }
   };

@@ -40,7 +40,7 @@ export const Faq = () => {
                 header={
                   <>
                     <div className={classes['item-title']}>{title}</div>
-                    <ChevronDownIcon />
+                    <div style={{width: 60, textAlign: 'right'}}><ChevronDownIcon /></div>
                   </>
                 }
               >

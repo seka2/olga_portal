@@ -66,21 +66,6 @@ interface SharedAuthResponse {
     return data;
   }
   
-  export const login = async (
-    email: string,
-    password: string
-  ): Promise<SharedAuthResponse> => {
-    const method = "portalLogin";
-    try {
-      const { data }: AxiosResponse<SharedAuthResponse> = await $host.post('request.php', {
-        method, email, password
-      });
-      return data;
-    } catch (error) {
-      console.error('Ошибка при выполнении запроса:', error);
-      throw error;
-    }
-  }
   
   export const registration = async (
     email: string,
@@ -127,7 +112,25 @@ interface SharedAuthResponse {
 
   }
   
-
+  
+  export const login = async (
+    email: string,
+    password: string
+  ): Promise<SharedAuthResponse> => {
+    const method = "portalLogin";
+    try {
+      const { data }: AxiosResponse<SharedAuthResponse> = await $host.post('request.php', {
+        method, email, password
+      });
+      if (data.result && data.token) {
+        localStorage.setItem('token', data.token);
+      }
+      return data;
+    } catch (error) {
+      console.error('Ошибка при выполнении запроса:', error);
+      throw error;
+    }
+  }
   
   
   export const finishLogin = async (
