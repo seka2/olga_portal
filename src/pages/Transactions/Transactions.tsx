@@ -7,7 +7,7 @@ import classes from "./Transactions.module.scss";
 import { CurrentDeals } from "./ui/CurrentDeals/CurrentDeals";
 import { ArchiveDeals } from "./ui/ArchiveDeals/ArchiveDeals";
 
-const tabs = ["Текущие сделки", "Архив результатов"];
+const tabs = ["Текущий месяц", "Архив результатов"];
 
 export const Transactions = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);

@@ -103,14 +103,13 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
           </div>
         )}
       </div>
-
+      
+      {secondary && (
       <div className={classes.info}>
-        {secondary && (
-          <Link to="/" className={classes.desktop}>
-            <DesktopImage />
-            <span>На рабочий стол</span>
-          </Link>
-        )}
+        <Link to="/" className={classes.desktop}>
+          <DesktopImage />
+          <span>На рабочий стол</span>
+        </Link>
         <a className={classes.link} href="tel:88003500857">
           8 (800) 350-08-57
         </a>
@@ -118,6 +117,19 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
           support@wise-olga.ru
         </a>
       </div>
+      )}
+
+      {!secondary && (
+      <div className={classes.info} style={{paddingLeft: 34}}>
+        <a className={classes.link} href="tel:88003500857">
+          8 (800) 350-08-57
+        </a>
+        <a className={classes.link} href="mailto:support@wise-olga.ru">
+          support@wise-olga.ru
+        </a>
+      </div>
+      )}
+
     </div>
   );
 };

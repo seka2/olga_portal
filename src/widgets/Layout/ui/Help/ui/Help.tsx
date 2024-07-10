@@ -1,8 +1,10 @@
 import TelegramIcon from "shared/assets/icons/telegram.svg?react";
-import YoutubeIcon from "shared/assets/icons/youtube.svg?react";
+import PhoneIcon from "shared/assets/icons/phone-icon-v3.svg?react";
+
+// https://www.svgrepo.com/svg/375858/phone?edit=true
 
 import classes from "./Help.module.scss";
-
+ 
 export const Help = () => {
   return (
     <div className={classes.help}>
@@ -17,17 +19,17 @@ export const Help = () => {
           <div className={classes.links}>
             <a
               className={classes.link}
-              href="https://t.me/+G5iiOnpZUOwzYjMy"
+              href="https://t.me/assistant_Olgawise"
               target="_blank"
             >
               <TelegramIcon />
             </a>
             <a
               className={classes.link}
-              href="https://www.youtube.com/@wise-olga"
+              href="tel:+78003500857"
               target="_blank"
             >
-              <YoutubeIcon />
+              <PhoneIcon />
             </a>
           </div>
         </div>

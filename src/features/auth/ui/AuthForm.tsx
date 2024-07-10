@@ -208,10 +208,13 @@ export const AuthForm: React.FC<AuthFormProps> = (props) => {
         ) : (
           <div className={classes.forgot}>Забыли пароль?</div>
         )}
+
         <div className={classes.items}>
+          
           <Button type="submit">
             {isRegistration ? "Зарегистрироваться" : "Войти"}
           </Button>
+
           <div style={{display: 'none'}}>
             <div className={classes.or}>
               <span>или</span>
@@ -226,9 +229,11 @@ export const AuthForm: React.FC<AuthFormProps> = (props) => {
             </Button>
           </div>
         </div>
+
         {isRegistration && !isMobile && (
           <ProgressBar className={classes.progress} value={50} />
         )}
+
       </Form>
     </Formik>
   );

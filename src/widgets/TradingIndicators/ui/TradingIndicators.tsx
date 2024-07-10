@@ -19,6 +19,7 @@ interface TradingIndicatorsProps {
 }
 
 const options = [
+  { value: "this_month", label: "Текущий месяц" },
   { value: "1_month", label: "Прошлый месяц" },
   { value: "3_months", label: "3 месяца" },
   { value: "6_months", label: "6 месяцев" },
@@ -37,7 +38,7 @@ export const TradingIndicators: React.FC<TradingIndicatorsProps> = (props) => {
   const keyTradingFigures = selectedPeriod ? `${selectedPeriod}` : '1_month';
 
   const isKeyTradingFigures = (key: any): key is keyof typeof stat.trading_figures => {
-    return key === "3_months" || key === "6_months" || key === "1_month" || key === "12_months";
+    return key === "this_month" || key === "3_months" || key === "6_months" || key === "1_month" || key === "12_months";
   };
 
   let loaded = false;
@@ -70,7 +71,7 @@ export const TradingIndicators: React.FC<TradingIndicatorsProps> = (props) => {
         />
         <IndicatorsChart
           title="Средняя прибыль на сделку"
-          progress={ loaded && isKeyTradingFigures(keyTradingFigures) ? stat.trading_figures[keyTradingFigures].average_profit_per_trade : 0 }
+          progress={ loaded && isKeyTradingFigures(keyTradingFigures) ? (stat.trading_figures[keyTradingFigures].average_profit_per_trade > 0 ? stat.trading_figures[keyTradingFigures].average_profit_per_trade : "--") : "--" }
           Icon={ProfitIcon}
         />
       </div>

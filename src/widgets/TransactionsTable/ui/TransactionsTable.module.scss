@@ -110,14 +110,14 @@
 
 .overflow {
   margin-bottom: 29px;
-  margin-right: calc((100vw - 1100px - 233px) / 2 * -1);
+  // margin-right: calc((100vw - 1100px - 233px) / 2 * -1);
   overflow: auto;
 
-  @media screen and (max-width: 1366px) {
+  /*@media screen and (max-width: 1366px) {
     margin-right: -20px;
-  }
+  }*/
   @media screen and (max-width: 992px) {
-    margin-right: -20px;
+    // margin-right: -20px;
     padding-bottom: 11px;
   }
 

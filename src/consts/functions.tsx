@@ -40,16 +40,17 @@ export const prettyNumber = (amount: number) => {
 }
 
 
-
-
-
-
-
-
-
 export const prettyNumber10 = (num: number) => {
     if (Number.isInteger(num) && num < 10 && num >= 0) {
         return num.toFixed(1);
     }
     return num.toString();
 }
+
+export const isString = (value : any): boolean => {
+    return typeof value === 'string';
+};
+
+export const isNumber = (value: any): boolean => {
+    return typeof value === 'number' && !isNaN(value);
+};

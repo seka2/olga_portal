@@ -1,6 +1,4 @@
 import { Button } from "shared/ui/Button/Button";
-
-import authMobileImage from "../../assets/auth-mobile.png";
 import classes from "./AuthMobile.module.scss";
 
 interface AuthMobileProps {
@@ -13,8 +11,7 @@ export const AuthMobile: React.FC<AuthMobileProps> = (props) => {
 
   return (
     <div className={classes.mobile}>
-      <div className={classes.skip}>Пропустить</div>
-      <img className={classes.img} src={authMobileImage} alt="" />
+      <div className={classes.background}></div>
       <div className={classes.title}>Войти в личный кабинет</div>
       <div className={classes.buttons}>
         <Button variant="secondary" onClick={onLogin}>

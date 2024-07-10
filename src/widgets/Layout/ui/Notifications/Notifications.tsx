@@ -47,9 +47,9 @@ export const Notifications: React.FC<NotificationsProps> = (props) => {
     <div className={clsx(classes.notifications, className)}>
       <div className={classes.icon}>
         <svg
-          width="16"
-          height="19"
-          viewBox="0 0 16 19"
+          width="19"
+          height="23"
+          viewBox="0 0 19 23"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >

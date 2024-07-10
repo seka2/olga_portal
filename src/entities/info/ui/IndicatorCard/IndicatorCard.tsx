@@ -7,7 +7,7 @@ import classes from "./IndicatorCard.module.scss";
 interface IndicatorCardProps {
   title: string;
   number: string;
-  progress?: number;
+  progress?: number | string;
 }
 
 export const IndicatorCard: React.FC<IndicatorCardProps> = (props) => {

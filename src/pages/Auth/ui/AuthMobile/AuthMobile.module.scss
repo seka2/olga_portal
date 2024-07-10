@@ -10,6 +10,15 @@
   background-size: contain;
 }
 
+.background {
+  background-image: url("../../assets/auth-mobile.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
 .skip {
   position: absolute;
   top: 24px;

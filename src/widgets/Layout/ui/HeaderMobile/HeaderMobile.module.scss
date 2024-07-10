@@ -4,9 +4,11 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 60px;
-  padding: 8px 19px 9px;
+  padding: 8px 19px 8px 19px;
   background: linear-gradient(78.08deg, #1d2b43 19.96%, #1d2b43 83.92%);
   color: #fff;
+  height: 65px;
+  
 
   @media screen and (max-width: 767px) {
     margin-bottom: 40px;
@@ -20,24 +22,38 @@
 }
 
 .search {
-  width: 169px;
+  width: 240px;
   margin-right: 28px;
 
   @media screen and (max-width: 575px) {
-    width: 109px;
-    margin-right: 11px;
+    width: 220px;
+    margin-right: 20px;
   }
+
+  
+  @media screen and (max-width: 525px) {
+    width: 200px;
+    margin-right: 20px;
+  }
+
+  
+  @media screen and (max-width: 462px) {
+    width: 140px;
+    margin-right: 20px;
+  }
+
 }
 
 .notifications {
   display: flex;
   margin-right: 28px;
+  margin-top: 2px;
 
   @media screen and (max-width: 767px) {
-    margin-right: 16px;
+    margin-right: 24px;
   }
   @media screen and (max-width: 575px) {
-    margin-right: 11px;
+    margin-right: 24px;
   }
 }
 
@@ -80,4 +96,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2px;
 }

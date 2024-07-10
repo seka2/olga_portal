@@ -18,11 +18,13 @@ export const InfoCard: React.FC<InfoCardProps> = (props) => {
 
   return (
     <div className={classes.card}>
-      <div className={classes.title}>{title}</div>
-      <div className={classes.list}>
-        {list.map(({ text, date, link }, idx) => (
-          <InfoItem key={idx.toString()} date={date} text={text} link={link} />
-        ))}
+      <div>
+        <div className={classes.title}>{title}</div>
+        <div className={classes.list}>
+          {list.map(({ text, date, link }, idx) => (
+            <InfoItem key={idx.toString()} date={date} text={text} link={link} />
+          ))}
+        </div>
       </div>
       <Link to={more} target="_blank">
         <Button className={clsx("button", classes.button)}>

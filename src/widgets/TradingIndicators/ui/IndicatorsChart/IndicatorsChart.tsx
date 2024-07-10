@@ -4,7 +4,7 @@ import classes from "./IndicatorsChart.module.scss";
 
 interface IndicatorsChartProps {
   title: string;
-  progress: number;
+  progress: number | string;
   Icon: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string | undefined;

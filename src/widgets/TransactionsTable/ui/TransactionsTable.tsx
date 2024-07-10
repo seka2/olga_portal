@@ -92,15 +92,15 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
                 <th>Открытие</th>
                 <th>Риск</th>
                 <th>Цена входа</th>
-                <th>СТОП</th>
-                <th>ПРОФИТ №1</th>
-                <th>ПРОФИТ №2</th>
-                <th>ПРОФИТ №3</th>
-                <th>Цена (закрытие или текущая)</th>
+                <th>Стоп</th>
+                <th>Профит №1</th>
+                <th>Профит №2</th>
+                <th>Профит №3</th>
+                <th>Текущая цена</th>
                 <th>Объем (лот)</th>
                 <th>Объем (руб.)</th>
                 <th>Доля, %</th>
-                <th>Результат,%</th>
+                <th>Результат, %</th>
               </tr>
             </thead>
             <tbody>
@@ -123,8 +123,15 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
                   </td>
                   <td>
                     <div className={classes.opening}>
-                      <NotesIcon />
-                      <span>{item.opening}</span>
+                      { item.opening == '-' ? (
+                        <span>{item.opening}</span>
+                      ) : (
+                        <>
+                          <NotesIcon />
+                          <span>{item.opening}</span>
+                        </>
+                      )}
+                      
                     </div>
                   </td>
                   <td style={{ color: "#00817A" }}>{item.risk}</td>
